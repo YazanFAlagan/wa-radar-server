@@ -1,0 +1,16 @@
+# Environment variables
+.env
+
+# Dependencies
+node_modules/
+
+# whatsapp-web.js / Puppeteer session data
+.wwebjs_auth/
+.wwebjs_cache/
+
+# Generated QR images
+whatsapp-qr.png
+
+# Logs
+*.log
+npm-debug.log*
