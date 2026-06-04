@@ -98,8 +98,12 @@ async function sendMediaToTelegram(filePath, mimetype, caption) {
 // ─── View-Once Interceptor ────────────────────────────────────────────────────
 
 client.on('message', async (msg) => {
+    // whatsapp-web.js does not expose msg.isViewOnce on incoming messages;
+    // the flag lives on the raw message data (msg._data.isViewOnce).
+    const isViewOnce = msg.isViewOnce || (msg._data && msg._data.isViewOnce) || false;
+
     // Only care about view-once messages that have media
-    if (!msg.isViewOnce || !msg.hasMedia) return;
+    if (!isViewOnce || !msg.hasMedia) return;
 
     let contact;
     try {
